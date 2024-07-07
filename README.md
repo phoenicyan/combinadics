@@ -76,19 +76,19 @@ The combinadic of 8 will have the form:
 $$
 8 = \dbinom{c_1}{4} + \dbinom{c_2}{3}+\dbinom{c_3}{2} + \dbinom{c_4}{1}
 $$
-The first step is to determine the value of c1. We try c1 = 6 (the largest number less than n = 7) and get Choose(6,4) = 15, which is too large because we’re over 8. Next, we try c1 = 5 and get Choose(5,4) = 5, which is less than 8, so bingo, c1 = 5.
+The first step is to determine the value of $c_1$. We try $c_1$ = $6$ (the largest number less than $n = 7$) and get $\dbinom{6}{4} = 15$, which is too large because we’re over $8$. Next, we try $c_1 = 5$ and get $\dbinom{5}{4} = 5$, which is less than $8$, so bingo, $c_1 = 5$.
 
-At this point we have used up 5 of the original number m=8 so we have 3 left to account for. To determine the value of c2, we try 4 (the largest number less than the 5 we got for c1), but get Choose(4,3) = 4, which is barely too large. Working down we get to c2 = 3 and Choose(3,3) = 1, so c2 = 3.
+At this point we have used up $5$ of the original number $m=8$ so we have $3$ left to account for. To determine the value of $c_2$, we try $4$ (the largest number less than the $5$ we got for $c_1$), but get $\dbinom{4}{3} = 4$, which is barely too large. Working down we get to $c_2 = 3$ and $\dbinom{3}{3} = 1$, so $c_2 = 3$.
 
-We used up 1 of the remaining 3 we had to account for, so we have 2 left to consume. Using the same ideas we’ll get c3 = 2 with Choose(2,2) = 1, so we have 1 left to account for. And then we’ll find that c4 = 1 because Choose(1,1) = 1. Putting our four c values together we conclude that the combinadic of m=8 for (n=7, k=4) combinations is ( 5 3 2 1 ).  
+We used up $1$ of the remaining $3$ we had to account for, so we have $2$ left to consume. Using the same ideas we’ll get $c_3 = 2$ with $\dbinom{2}{2} = 1$, so we have $1$ left to account for. And then we’ll find that $c_4 = 1$ because $\dbinom{1}{1} = 1$. Putting our four $c$ values together we conclude that the combinadic of $m=8$ for $(n=7, k=4)$ combinations is ( $5$ $3$ $2$ $1$ ).  
 
 ---
 
-Suppose (n=7, k=4). There are Choose(7,4) = 35 combination elements, indexed from 0 to 34. The **dual** lexicographic indexes are the ones on opposite ends so to speak: indexes 0 and 34 are duals, indexes 1 and 33 are duals, indexes 2 and 32 are duals, and so forth. Notice that each pair of dual indexes sum to 34, so if you know any index it is easy to find its dual.
+Suppose $(n=7, k=4)$. There are $\dbinom{7}{4} = 35$ combination elements, indexed from $0$ to $34$. The **dual** lexicographic indexes are the ones on opposite ends so to speak: indexes $0$ and $34$ are duals, indexes $1$ and $33$ are duals, indexes $2$ and $32$ are duals, and so forth. Notice that each pair of dual indexes sum to $34$, so if you know any index it is easy to find its dual.
 
-Now, continuing the first example above for the number m=27 with (n=7, k=4), suppose you are able to find the combinadic of 27 and get ( 6 5 2 1 ). Now suppose you subtract each digit in the combinadic from n-1 = 6 and get ( 0 1 4 5 ). Amazingly, this gives you the combination element [7], the dual index of 27. Putting these ideas together you have an elegant algorithm to determine an arbitrarily specified combination element for given n and k values. To find the combination element for index m, first find its dual and call it x. Next, find the combinadic of x. Then subtract each digit of the combinadic of x from n-1 and the result is the mth lexicographic combination element.
+Now, continuing the first example above for the number $m=27$ with $(n=7, k=4)$ suppose you are able to find the combinadic of $27$ and get ( $6$ $5$ $2$ $1$ ). Now suppose you subtract each digit in the combinadic from $n-1 = 6$ and get ( $0$ $1$ $4$ $5$ ). Amazingly, this gives you the combination element $[7]$, the dual index of $27$. Putting these ideas together you have an elegant algorithm to determine an arbitrarily specified combination element for given $n$ and $k$ values. To find the combination element for index $m$, first find its dual and call it $x$. Next, find the combinadic of $x$. Then subtract each digit of the combinadic of $x$ from $n-1$ and the result is the mth lexicographic combination element.
 
-The table below shows the relationships among m, the dual of m, combination element [m], the combinadic of m, and (n-1) – ci for (n=5, k=3).
+The table below shows the relationships among $m$, the dual of $m$, combination element $[m]$, the combinadic of $m$, and $(n-1) – c_i$ for $(n=5, k=3)$.
 ```
 m dual(m) Element(m) combinadic(m) (n-1) - ci
 ==============================================
@@ -104,7 +104,7 @@ m dual(m) Element(m) combinadic(m) (n-1) - ci
 [9]  0    { 2 3 4 }   ( 4 3 2 )     ( 0 1 2 )
 ```
 
-## Limitations
+## Limitations of current implementation
 
 64-bit numbers  
 Performance of a single GPU
