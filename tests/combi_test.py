@@ -1,16 +1,24 @@
 # pytest -rP tests
-import os, sys
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
+import os
+import sys
 
-from combinadics.combinadics import (is_number, cuda_calculateMth)
+sys.path.insert(1, os.path.join(sys.path[0], ".."))
 
-import math, jax, jax.numpy as jnp
+import math
+
+import jax
+import jax.numpy as jnp
 from jax import jacfwd
+
+from combinadics.combinadics import cuda_calculateMth, is_number
 
 jax.config.update("jax_enable_x64", True)
 
-import numpy as np, itertools
+import itertools
 from time import time
+
+import numpy as np
+
 
 def mytest_combi(n, k):
     totalcount = 1
@@ -67,24 +75,29 @@ def mytest_combi(n, k):
 
     startTime = time()
     expected = jnp.array(list(itertools.combinations(range(n), k)), dtype=jnp.int16)
-    same  = jnp.array_equal(expected, result)
+    same = jnp.array_equal(expected, result)
     endTime = time()
 
     print(f"\nnumpy elapsed time: {endTime-startTime}")
 
     assert same
 
+
 def test_combi_5_3():
-    mytest_combi(5,3)
+    mytest_combi(5, 3)
+
 
 def test_combi_7_2():
-    mytest_combi(7,2)
+    mytest_combi(7, 2)
+
 
 def test_combi_72_1():
     mytest_combi(72, 1)
 
+
 def test_combi_72_2():
     mytest_combi(72, 2)
+
 
 # def test_combi_72_3():
 #     mytest_combi(72, 3)
@@ -92,8 +105,10 @@ def test_combi_72_2():
 # def test_combi_72_4():
 #     mytest_combi(72, 4)
 
+
 def test_combi_576_1():
     mytest_combi(576, 1)
+
 
 # def test_combi_576_2():
 #     mytest_combi(576, 2)
@@ -102,7 +117,8 @@ def test_combi_576_1():
 #     mytest_combi(576, 3)
 
 # def test_combi_576_4():
-    # test_combi(576,4) # must use int64 for mth numbers
+# test_combi(576,4) # must use int64 for mth numbers
+
 
 def test_demo():
     # setup
@@ -111,13 +127,20 @@ def test_demo():
     totalcount = math.comb(n, k)
 
     # numpy
-    print(f"Calculate combinations \"{n} choose {k}\" in numpy:")
+    print(f'Calculate combinations "{n} choose {k}" in numpy:')
     for comb in itertools.combinations(np.arange(start=0, stop=n, dtype=jnp.int32), k):
         print(comb)
 
     # combinadics
     print("Calculate via combinadics:")
-    actual = n-1 - cuda_calculateMth(n, k, totalcount-1 - jnp.arange(start=0, stop=n, dtype=jnp.int32),)
+    actual = (
+        n
+        - 1
+        - cuda_calculateMth(
+            n,
+            k,
+            totalcount - 1 - jnp.arange(start=0, stop=n, dtype=jnp.int32),
+        )
+    )
     for comb in actual:
         print(comb)
-

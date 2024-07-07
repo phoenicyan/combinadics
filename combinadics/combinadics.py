@@ -1,10 +1,10 @@
 """ 
 """
-#from pdb import set_trace
+# from pdb import set_trace
 
 import jax
 import jax.numpy as jnp
-from jax import jacfwd  #, combinations
+from jax import jacfwd  # , combinations
 
 jax.config.update("jax_enable_x64", True)
 
@@ -13,12 +13,14 @@ from functools import partial
 from jax import jit, lax, random, tree_util, vmap
 from jax.experimental import host_callback
 
+
 def is_number(in_value):
     try:
         float(in_value)
         return True
     except ValueError:
         return False
+
 
 @jit
 def choose_sk(n: jnp.int16, k: jnp.int16) -> jnp.int32:
@@ -56,7 +58,13 @@ def largestV_sk(a: jnp.int16, b: jnp.int16, x_sk: jnp.int32) -> jnp.array:
     return lax.while_loop(cond_fun=cond, body_fun=body, init_val=jnp.int16(a - 1))
 
 
-@partial(jit, static_argnums=(0,1,), )
+@partial(
+    jit,
+    static_argnums=(
+        0,
+        1,
+    ),
+)
 def cuda_calculateMth(n: jnp.int16, k: jnp.int16, m: jnp.array) -> jnp.array:
     # print(f"cuda_calculateMth({n}, {k}, {m.shape}:{m.dtype})")
     def choose_hlp(n_sk: jnp.int16, k_sk: jnp.int16) -> jnp.int32:

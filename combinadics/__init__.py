@@ -1,1 +1,1 @@
-from combinadics.combinadics import (is_number, cuda_calculateMth)
+from combinadics.combinadics import cuda_calculateMth, is_number

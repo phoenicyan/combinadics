@@ -19,6 +19,6 @@ setuptools.setup(
         "License :: FSF Approved :: GNU3",
         "Operating System :: Linux",
     ],
-    python_requires='>=3.9',
+    python_requires=">=3.9",
     install_requires=requirements,
 )
