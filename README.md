@@ -52,6 +52,7 @@ $$
 <!-- 859 = (8 * 10^2) + (5 * 10^1) + (9 * 10^0) -->
 <!-- ``` -->
 The combinadic of an integer is its representation based on a variable base corresponding to the values of the binomial coefficient $\dbinom{n}{k}$. For example if ($n=7, k=4$) then the integer $27$ can be represented as
+
 $$
 27 = \dbinom{{6}}{4} + \dbinom{5}{3} + \dbinom{2}{2} + \dbinom{1}{1} = 15 + 10 + 1 + 1
 $$
@@ -60,6 +61,7 @@ $$
 <!-- 27 = Choose(6,4) + Choose(5,3) + Choose(2,2) + Choose(1,1) = 15 + 10 + 1 + 1 -->
 <!-- ``` -->
 With ($n=7, k=4$), any number $m$ between $0$ and $34$ (the total number of combination elements for $n$ and $k$) can be uniquely represented as
+
 $$
 m = \dbinom{c_1}{4} + \dbinom{c_2}{3}+\dbinom{c_3}{2} + \dbinom{c_4}{1}
 $$
@@ -73,9 +75,11 @@ where $n > c_1 > c_2 > c_3 > c_4$. Notice that $n$ is analogous to the base beca
 Here’s an example of how a combinadic is calculated. Suppose you are working with ($n=7, k=4$) combinations, and $m = 8$. You want the combinadic of 8 because, as it turns out, the combinadic can be converted to combination element [8].
 
 The combinadic of 8 will have the form:
+
 $$
 8 = \dbinom{c_1}{4} + \dbinom{c_2}{3}+\dbinom{c_3}{2} + \dbinom{c_4}{1}
 $$
+
 The first step is to determine the value of $c_1$. We try $c_1$ = $6$ (the largest number less than $n = 7$) and get $\dbinom{6}{4} = 15$, which is too large because we’re over $8$. Next, we try $c_1 = 5$ and get $\dbinom{5}{4} = 5$, which is less than $8$, so bingo, $c_1 = 5$.
 
 At this point we have used up $5$ of the original number $m=8$ so we have $3$ left to account for. To determine the value of $c_2$, we try $4$ (the largest number less than the $5$ we got for $c_1$), but get $\dbinom{4}{3} = 4$, which is barely too large. Working down we get to $c_2 = 3$ and $\dbinom{3}{3} = 1$, so $c_2 = 3$.
